@@ -63,3 +63,13 @@ public class NucleotideosTest {
          int[] result = nucleotideos.calculaNucleotideos(caminho);
          assertArrayEquals(expResult,result);
      }
+     //Este caso de teste verifica se o valor retornado é null quando o número de erros for superior a 10% do tamanho da sequência.
+    @Test
+    public void testCalculaNucleotideosSequenciaInvalida() throws IOException {
+        System.out.println("CalculaNucleotideosSequenciaInvalida");
+        String caminho = "arquivo3.txt";
+        Nucleotideos nucleotideos = new Nucleotideos();
+        int[] expResult = null;
+        int[] result = nucleotideos.calculaNucleotideos(caminho);
+        assertArrayEquals(expResult,result);
+        
