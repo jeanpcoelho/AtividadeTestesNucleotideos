@@ -53,4 +53,13 @@ public class NucleotideosTest {
             }
         }
     }
-    
+     //Este caso de teste verifica se o valor retornado é válido quando não existir erros na sequência.
+     @Test
+     public void testCalculaNucleotideosSequenciaValidaSemErros() throws IOException {
+         System.out.println("CalculaNucleotideosSequenciaValidaSemErros");
+         String caminho = "arquivo2.txt";
+         Nucleotideos nucleotideos = new Nucleotideos();
+         int[] expResult = {4,2,2,2,0};
+         int[] result = nucleotideos.calculaNucleotideos(caminho);
+         assertArrayEquals(expResult,result);
+     }
