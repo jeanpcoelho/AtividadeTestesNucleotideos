@@ -12,3 +12,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 
+
+public class NucleotideosTest {
+    @BeforeAll
+    public static void setUpClass() throws IOException {
+        String nome = "arquivo";
+        for (int i = 0; i < 6; i++) {
+            File arquivo = new File(nome + (i+1) + ".txt");
+            arquivo.createNewFile();
