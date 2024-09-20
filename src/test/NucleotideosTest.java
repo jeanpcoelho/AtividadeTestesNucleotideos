@@ -83,4 +83,21 @@ public class NucleotideosTest {
         int[] result = nucleotideos.calculaNucleotideos(caminho);
         assertArrayEquals(expResult,result);
     }
-    
+     //Este caso de teste verifica se ocorre uma exceção no caso de se criar um arquivo sem gravar nenhum valor (NullPointerException).
+     @Test
+     public void testCalculaNucleotideosSequenciaNula() throws IOException {
+         System.out.println("CalculaNucleotideosSequenciaNula");
+         String caminho = "arquivo6.txt";
+         Nucleotideos nucleotideos = new Nucleotideos();
+         Exception exception = assertThrows(Exception.class, () -> nucleotideos.calculaNucleotideos(caminho));
+         assertEquals(NullPointerException.class, exception.getClass());
+     }
+     //Este caso de teste verifica se ocorre uma exceção no caso de um arquivo de texto passado como parâmetro não seja encontrado (FileNotFoundException).
+    @Test
+    public void testCalculaNucleotideosArquivoNaoExiste() throws IOException {
+        System.out.println("CalculaNucleotideosArquivoNaoExiste");
+        String caminho = "arquivo7.txt";
+        Nucleotideos nucleotideos = new Nucleotideos();
+        Exception exception = assertThrows(Exception.class, () -> nucleotideos.calculaNucleotideos(caminho));
+        assertEquals(FileNotFoundException.class, exception.getClass());
+    }
