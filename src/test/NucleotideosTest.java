@@ -43,3 +43,14 @@ public class NucleotideosTest {
             bw5.newLine();
         }
     }    
+    @AfterAll
+    public static void tearDownClass() throws IOException {
+        String nome = "arquivo";
+        for (int i = 0; i < 6; i++) {
+            File arquivo = new File(nome + (i+1) + ".txt");
+            if (arquivo.exists()) {
+                arquivo.delete();
+            }
+        }
+    }
+    
