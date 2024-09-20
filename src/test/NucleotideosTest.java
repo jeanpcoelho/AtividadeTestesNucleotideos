@@ -72,4 +72,15 @@ public class NucleotideosTest {
         int[] expResult = null;
         int[] result = nucleotideos.calculaNucleotideos(caminho);
         assertArrayEquals(expResult,result);
-        
+    }
+    //Este caso de teste verifica se o valor retornado é null quando a sequência é vazia, assim o array será igual a [0,0,0,0,0].
+    @Test
+    public void testCalculaNucleotideosSequenciaVazia() throws IOException {
+        System.out.println("CalculaNucleotideosSequenciaVazia");
+        String caminho = "arquivo5.txt";
+        Nucleotideos nucleotideos = new Nucleotideos();
+        int[] expResult = null;
+        int[] result = nucleotideos.calculaNucleotideos(caminho);
+        assertArrayEquals(expResult,result);
+    }
+    
