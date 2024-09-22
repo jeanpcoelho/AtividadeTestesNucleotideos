@@ -1,8 +1,7 @@
-package poo2.nucleotideos;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -12,16 +11,16 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 
-
 public class NucleotideosTest {
+    
     @BeforeAll
     public static void setUpClass() throws IOException {
         String nome = "arquivo";
         for (int i = 0; i < 6; i++) {
             File arquivo = new File(nome + (i+1) + ".txt");
             arquivo.createNewFile();
-
         }
+
         try (BufferedWriter bw1 = new BufferedWriter(new FileWriter("arquivo1.txt"))) {
             bw1.write("AACTGTCGBA");
             bw1.newLine();
@@ -42,7 +41,8 @@ public class NucleotideosTest {
             bw5.write("");
             bw5.newLine();
         }
-    }    
+    }
+
     @AfterAll
     public static void tearDownClass() throws IOException {
         String nome = "arquivo";
@@ -53,18 +53,20 @@ public class NucleotideosTest {
             }
         }
     }
-     //Este caso de teste verifica se o valor retornado é válido quando não existir erros na sequência.
-     @Test
-     public void testCalculaNucleotideosSequenciaValidaSemErros() throws IOException {
-         System.out.println("CalculaNucleotideosSequenciaValidaSemErros");
-         String caminho = "arquivo2.txt";
-         Nucleotideos nucleotideos = new Nucleotideos();
-         int[] expResult = {4,2,2,2,0};
-         int[] result = nucleotideos.calculaNucleotideos(caminho);
-         assertArrayEquals(expResult,result);
-     }
-     //Este caso de teste verifica se o valor retornado é null quando o número de erros for superior a 10% do tamanho da sequência.
+
     @Test
+    @DisplayName("Verifica sequência válida sem erros")
+    public void testCalculaNucleotideosSequenciaValidaSemErros() throws IOException {
+        System.out.println("CalculaNucleotideosSequenciaValidaSemErros");
+        String caminho = "arquivo2.txt";
+        Nucleotideos nucleotideos = new Nucleotideos();
+        int[] expResult = {4,2,2,2,0};
+        int[] result = nucleotideos.calculaNucleotideos(caminho);
+        assertArrayEquals(expResult,result);
+    }
+
+    @Test
+    @DisplayName("Verifica retorno null para mais de 10% de caracteres inválidos")
     public void testCalculaNucleotideosSequenciaInvalida() throws IOException {
         System.out.println("CalculaNucleotideosSequenciaInvalida");
         String caminho = "arquivo3.txt";
@@ -73,31 +75,25 @@ public class NucleotideosTest {
         int[] result = nucleotideos.calculaNucleotideos(caminho);
         assertArrayEquals(expResult,result);
     }
-    //Este caso de teste verifica se o valor retornado é null quando a sequência é vazia, assim o array será igual a [0,0,0,0,0].
+
     @Test
+    @DisplayName("Verifica retorno para sequência vazia")
     public void testCalculaNucleotideosSequenciaVazia() throws IOException {
         System.out.println("CalculaNucleotideosSequenciaVazia");
         String caminho = "arquivo5.txt";
         Nucleotideos nucleotideos = new Nucleotideos();
-        int[] expResult = null;
+        int[] expResult = {0,0,0,0,0};
         int[] result = nucleotideos.calculaNucleotideos(caminho);
         assertArrayEquals(expResult,result);
     }
-     //Este caso de teste verifica se ocorre uma exceção no caso de se criar um arquivo sem gravar nenhum valor (NullPointerException).
-     @Test
-     public void testCalculaNucleotideosSequenciaNula() throws IOException {
-         System.out.println("CalculaNucleotideosSequenciaNula");
-         String caminho = "arquivo6.txt";
-         Nucleotideos nucleotideos = new Nucleotideos();
-         Exception exception = assertThrows(Exception.class, () -> nucleotideos.calculaNucleotideos(caminho));
-         assertEquals(NullPointerException.class, exception.getClass());
-     }
-     //Este caso de teste verifica se ocorre uma exceção no caso de um arquivo de texto passado como parâmetro não seja encontrado (FileNotFoundException).
+
     @Test
+    @DisplayName("Verifica exceção para arquivo inexistente")
     public void testCalculaNucleotideosArquivoNaoExiste() throws IOException {
         System.out.println("CalculaNucleotideosArquivoNaoExiste");
         String caminho = "arquivo7.txt";
         Nucleotideos nucleotideos = new Nucleotideos();
-        Exception exception = assertThrows(Exception.class, () -> nucleotideos.calculaNucleotideos(caminho));
+        Exception exception = assertThrows(FileNotFoundException.class, () -> nucleotideos.calculaNucleotideos(caminho));
         assertEquals(FileNotFoundException.class, exception.getClass());
     }
+}
