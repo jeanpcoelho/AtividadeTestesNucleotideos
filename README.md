@@ -1,4 +1,8 @@
 # AtividadeTestesNucleotideos
+
+OBS: em desenvolvimento, imcompleto 
+
+
 IDE : Visual Studio Code
 
 JUnit: JUnit 5 
