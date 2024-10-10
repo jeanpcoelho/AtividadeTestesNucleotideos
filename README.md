@@ -1,6 +1,6 @@
 # AtividadeTestesNucleotideos
 
-OBS: Em desenvolvimento, imcompleto 
+OBS: Em desenvolvimento, incompleto 
 
 
 IDE : Visual Studio Code
